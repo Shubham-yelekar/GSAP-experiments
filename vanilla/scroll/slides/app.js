@@ -39,9 +39,8 @@ document.addEventListener("DOMContentLoaded", (event) => {
       image: "picture-4.webp",
     },
   ];
-  const SLIDE_DURATION = 2;
 
-  const pinDistance = window.innerHeight * slides.length * SLIDE_DURATION;
+  const pinDistance = window.innerHeight * slides.length;
   const progressBar = document.querySelector(".slider-progress");
   const sliderImages = document.querySelector(".slider-images");
   const sliderTitle = document.querySelector(".slider-title");
@@ -199,11 +198,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
       gsap.set(progressBar, {
         scaleY: self.progress,
       });
-      const totalSlides = slides.length;
-      const slideProgress = self.progress * totalSlides;
-      const currentSlide = Math.floor(slideProgress / SLIDE_DURATION);
 
-      if (activeSlide !== currentSlide && currentSlide < totalSlides) {
+      const currentSlide = Math.floor(self.progress * slides.length);
+
+      if (activeSlide !== currentSlide && currentSlide < slides.length) {
         activeSlide = currentSlide;
         animateNewSlide(activeSlide);
       }
